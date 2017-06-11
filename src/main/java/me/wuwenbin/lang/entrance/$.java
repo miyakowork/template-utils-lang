@@ -14,6 +14,16 @@ import me.wuwenbin.lang.file.Files;
 public class $ {
 
     /**
+     * 金额操作
+     */
+    public static Amount amount = new Amount();
+
+    /**
+     * java class扫描
+     */
+    public static ClassScan classScan = new ClassScan();
+
+    /**
      * 有关web中html转义的相关工具类方法
      */
     public static HtmlTag htmlTag = new HtmlTag();
@@ -112,4 +122,5 @@ public class $ {
      * 文件工具类
      */
     public static Files files = new Files();
+
 }
