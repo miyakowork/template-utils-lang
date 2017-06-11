@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author xiaoleilu
  */
-public class XmlW3cUtils {
+public class XmlW3c {
 
     /**
      * 在XML中无效的字符 正则
@@ -33,12 +33,12 @@ public class XmlW3cUtils {
      * @param file XML文件
      * @return XML文档对象
      */
-    public static Document readXML(File file) {
+    public Document readXML(File file) {
         if (file == null) {
             throw new NullPointerException("Xml file is null !");
         }
         if (file.exists() == false) {
-            throw new LangException("File [" + file.getAbsolutePath() + "] not a exist!");
+            throw new LangException("Files [" + file.getAbsolutePath() + "] not a exist!");
         }
         if (file.isFile() == false) {
             throw new LangException("[" + file.getAbsolutePath() + "] not a file!");
@@ -64,7 +64,7 @@ public class XmlW3cUtils {
      * @param absoluteFilePath XML文件绝对路径
      * @return XML文档对象
      */
-    public static Document readXML(String absoluteFilePath) {
+    public Document readXML(String absoluteFilePath) {
         return readXML(new File(absoluteFilePath));
     }
 
@@ -76,7 +76,7 @@ public class XmlW3cUtils {
      * @param tagName 节点名
      * @return 节点列表
      */
-    public static List<Element> getElements(Element element, String tagName) {
+    public List<Element> getElements(Element element, String tagName) {
         final NodeList nodeList = element.getElementsByTagName(tagName);
         return transElements(element, nodeList);
     }
@@ -88,7 +88,7 @@ public class XmlW3cUtils {
      * @param tagName 节点名
      * @return 节点
      */
-    public static Element getElement(Element element, String tagName) {
+    public Element getElement(Element element, String tagName) {
         final NodeList nodeList = element.getElementsByTagName(tagName);
         if (nodeList == null || nodeList.getLength() < 1) {
             return null;
@@ -110,7 +110,7 @@ public class XmlW3cUtils {
      * @param tagName 节点名
      * @return 节点中的值
      */
-    public static String elementText(Element element, String tagName) {
+    public String elementText(Element element, String tagName) {
         Element child = getElement(element, tagName);
         return child == null ? null : child.getTextContent();
     }
@@ -122,7 +122,7 @@ public class XmlW3cUtils {
      * @param tagName 节点名
      * @return 节点中的值
      */
-    public static String elementText(Element element, String tagName, String defaultValue) {
+    public String elementText(Element element, String tagName, String defaultValue) {
         Element child = getElement(element, tagName);
         return child == null ? defaultValue : child.getTextContent();
     }
@@ -133,7 +133,7 @@ public class XmlW3cUtils {
      * @param nodeList NodeList
      * @return Element列表
      */
-    public static List<Element> transElements(NodeList nodeList) {
+    public List<Element> transElements(NodeList nodeList) {
         return transElements(null, nodeList);
     }
 
@@ -144,7 +144,7 @@ public class XmlW3cUtils {
      * @param nodeList  NodeList
      * @return Element列表
      */
-    public static List<Element> transElements(Element parentEle, NodeList nodeList) {
+    public List<Element> transElements(Element parentEle, NodeList nodeList) {
         final ArrayList<Element> elements = new ArrayList<>();
         int length = nodeList.getLength();
         for (int i = 0; i < length; i++) {

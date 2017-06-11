@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  * 有关web中html转义的相关工具类方法
  * Created By wuwenbin on in 2016/9/2
  */
-public class HtmlTagUtils {
+public class HtmlTag {
     /**
      * <b>Author</b> : Wuwenbin<br>
      * <b>Title</b> : html2Text<br>
@@ -17,7 +17,7 @@ public class HtmlTagUtils {
      * @param inputString
      * @return
      */
-    public static String html2Text(String inputString) {
+    public String html2Text(String inputString) {
         String htmlStr = inputString; // 含html标签的字符串
         String textStr = "";
         Pattern p_script;
@@ -55,7 +55,7 @@ public class HtmlTagUtils {
      * @param tag
      * @return
      */
-    public static String filterHtmlTag(String str, String tag) {
+    public String filterHtmlTag(String str, String tag) {
         String reg_xp = "<\\s*" + tag + "\\s+([^>]*)\\s*>";
         Pattern pattern = Pattern.compile(reg_xp);
         Matcher matcher = pattern.matcher(str);
@@ -79,7 +79,7 @@ public class HtmlTagUtils {
      * @param endTag    新标签结束标记
      * @return
      */
-    public static String replaceHtmlTag(String str, String beforeTag, String tagAttr, String startTag, String endTag) {
+    public String replaceHtmlTag(String str, String beforeTag, String tagAttr, String startTag, String endTag) {
         String regxpForTag = "<\\s*" + beforeTag + "\\s+([^>]*)\\s*>";
         String regxpForTagAttrib = tagAttr + "=\"([^\"]+)\"";
         Pattern patternForTag = Pattern.compile(regxpForTag);

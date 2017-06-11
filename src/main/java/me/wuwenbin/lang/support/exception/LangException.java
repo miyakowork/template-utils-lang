@@ -1,7 +1,7 @@
 package me.wuwenbin.lang.support.exception;
 
 
-import me.wuwenbin.lang.common.StringUtils;
+import me.wuwenbin.lang.common.StringHelper;
 
 /**
  * 工具类异常
@@ -13,7 +13,7 @@ import me.wuwenbin.lang.common.StringUtils;
 public class LangException extends RuntimeException {
 
     public LangException(Throwable e) {
-        super(StringUtils.format("{}: {}", e.getClass().getSimpleName(), e.getMessage()));
+        super(StringHelper.format("{}: {}", e.getClass().getSimpleName(), e.getMessage()));
     }
 
     public LangException(String message) {
@@ -21,7 +21,7 @@ public class LangException extends RuntimeException {
     }
 
     public LangException(String messageTemplate, Object... params) {
-        super(StringUtils.format(messageTemplate, params));
+        super(StringHelper.format(messageTemplate, params));
     }
 
     public LangException(String message, Throwable throwable) {
@@ -29,7 +29,7 @@ public class LangException extends RuntimeException {
     }
 
     public LangException(Throwable throwable, String messageTemplate, Object... params) {
-        super(StringUtils.format(messageTemplate, params), throwable);
+        super(StringHelper.format(messageTemplate, params), throwable);
     }
 
 }

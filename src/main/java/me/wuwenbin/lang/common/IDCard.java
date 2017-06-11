@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  * @date:2016年6月1日 下午12:29:41
  * @since 1.0
  */
-public class IDCardUtils {
+public class IDCard {
 
     /**
      * 省，直辖市代码表： { 11:"北京",12:"天津",13:"河北",14:"山西",15:"内蒙古",
@@ -75,7 +75,7 @@ public class IDCardUtils {
      * @author : chenssy
      * @date : 2016年6月1日 下午12:31:10
      */
-    public static boolean isValidate18Idcard(String idcard) {
+    public boolean isValidate18Idcard(String idcard) {
         // 非18位为假
         if (idcard.length() != 18) {
             return false;
@@ -120,7 +120,7 @@ public class IDCardUtils {
      * @author : chenssy
      * @date : 2016年6月1日 下午12:31:49
      */
-    public static boolean is18Idcard(String idcard) {
+    public boolean is18Idcard(String idcard) {
         return Pattern.matches("^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}([\\d|x|X]{1})$", idcard);
     }
 
@@ -132,7 +132,7 @@ public class IDCardUtils {
      * @author : chenssy
      * @date : 2016年6月1日 下午12:32:18
      */
-    private static boolean isDigital(String str) {
+    private boolean isDigital(String str) {
         return str == null || "".equals(str) ? false : str.matches("^[0-9]*$");
     }
 
@@ -144,7 +144,7 @@ public class IDCardUtils {
      * @author : chenssy
      * @date : 2016年6月1日 下午12:32:34
      */
-    private static int getPowerSum(int[] bit) {
+    private int getPowerSum(int[] bit) {
         int sum = 0;
         if (power.length != bit.length) {
             return sum;
@@ -169,7 +169,7 @@ public class IDCardUtils {
      * @author : chenssy
      * @date : 2016年6月1日 下午12:32:51
      */
-    private static String getCheckCodeBySum(int sum17) {
+    private String getCheckCodeBySum(int sum17) {
         String checkCode = null;
         switch (sum17 % 11) {
             case 10:
@@ -218,7 +218,7 @@ public class IDCardUtils {
      * @author : chenssy
      * @date : 2016年6月1日 下午12:33:22
      */
-    private static int[] converCharToInt(char[] c) throws NumberFormatException {
+    private int[] converCharToInt(char[] c) throws NumberFormatException {
         int[] a = new int[c.length];
         int k = 0;
         for (char temp : c) {
@@ -231,7 +231,7 @@ public class IDCardUtils {
      * @param idno
      * @return 身份证信息中代表性别的数值
      */
-    public static int getUserSex(String idno) {
+    public int getUserSex(String idno) {
         String sex = "1";
         if (idno != null) {
             if (idno.length() > 15) {

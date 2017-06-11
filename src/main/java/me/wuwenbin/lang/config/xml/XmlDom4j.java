@@ -26,7 +26,7 @@ import org.dom4j.io.XMLWriter;
  * @date 2011/4/13
  * @since 1.0
  */
-public class XmlDom4jUtils {
+public class XmlDom4j {
 
     /**
      * @param xmlPath
@@ -35,7 +35,7 @@ public class XmlDom4jUtils {
      * @返回类型：Document
      * @时间：2011-4-14下午12:44:20
      */
-    public static Document createEmptyXmlFile(String xmlPath) {
+    public Document createEmptyXmlFile(String xmlPath) {
         if (xmlPath == null || xmlPath.equals(""))
             return null;
 
@@ -60,7 +60,7 @@ public class XmlDom4jUtils {
      * @return
      * @throws DocumentException
      */
-    public static Document getDocument(String xmlPath) {
+    public Document getDocument(String xmlPath) {
         if (xmlPath == null || xmlPath.equals(""))
             return null;
 
@@ -86,7 +86,7 @@ public class XmlDom4jUtils {
      * @返回类型：Element
      * @时间：2011-4-8下午12:54:02
      */
-    public static Element getRootNode(Document document) {
+    public Element getRootNode(Document document) {
         if (document == null)
             return null;
 
@@ -104,7 +104,7 @@ public class XmlDom4jUtils {
      * @返回类型：Element
      * @时间：2011-4-14下午03:01:14
      */
-    public static Element getRootNode(String xmlPath) {
+    public Element getRootNode(String xmlPath) {
         if (xmlPath == null || (xmlPath.trim()).equals(""))
             return null;
         Document document = getDocument(xmlPath);
@@ -121,7 +121,7 @@ public class XmlDom4jUtils {
      * @时间：2011-4-14上午11:29:18
      */
     @SuppressWarnings("unchecked")
-    public static Iterator<Element> getIterator(Element parent) {
+    public Iterator<Element> getIterator(Element parent) {
         if (parent == null)
             return null;
         Iterator<Element> iterator = parent.elementIterator();
@@ -137,7 +137,7 @@ public class XmlDom4jUtils {
      * @时间：2011-4-14上午11:18:03
      */
     @SuppressWarnings("unchecked")
-    public static List<Element> getChildElements(Element parent, String childName) {
+    public List<Element> getChildElements(Element parent, String childName) {
         childName = childName.trim();
         if (parent == null)
             return null;
@@ -154,7 +154,7 @@ public class XmlDom4jUtils {
      * @返回类型：List<Element>
      * @时间：2011-4-14下午12:21:52
      */
-    public static List<Element> getChildList(Element node) {
+    public List<Element> getChildList(Element node) {
         if (node == null)
             return null;
         Iterator<Element> itr = getIterator(node);
@@ -179,7 +179,7 @@ public class XmlDom4jUtils {
      * @返回类型：Node
      * @时间：2011-4-14下午12:38:25
      */
-    public static Node getSingleNode(Element parent, String nodeNodeName) {
+    public Node getSingleNode(Element parent, String nodeNodeName) {
         nodeNodeName = nodeNodeName.trim();
         String xpath = "//";
         if (parent == null)
@@ -201,7 +201,7 @@ public class XmlDom4jUtils {
      * @时间：2011-4-14下午12:53:22
      */
     @SuppressWarnings("rawtypes")
-    public static Element getChild(Element parent, String childName) {
+    public Element getChild(Element parent, String childName) {
         childName = childName.trim();
         if (parent == null)
             return null;
@@ -228,7 +228,7 @@ public class XmlDom4jUtils {
      * @返回类型：boolean
      * @时间：2011-4-14下午01:43:48
      */
-    public static boolean hasChild(Element e) {
+    public boolean hasChild(Element e) {
         if (e == null)
             return false;
         return e.hasContent();
@@ -242,7 +242,7 @@ public class XmlDom4jUtils {
      * @时间：2011-4-14下午01:42:38
      */
     @SuppressWarnings("unchecked")
-    public static Iterator<Attribute> getAttrIterator(Element e) {
+    public Iterator<Attribute> getAttrIterator(Element e) {
         if (e == null)
             return null;
         Iterator<Attribute> attrIterator = e.attributeIterator();
@@ -257,7 +257,7 @@ public class XmlDom4jUtils {
      * @返回类型：List<Attribute>
      * @时间：2011-4-14下午01:41:38
      */
-    public static List<Attribute> getAttributeList(Element e) {
+    public List<Attribute> getAttributeList(Element e) {
         if (e == null)
             return null;
         List<Attribute> attributeList = new ArrayList<Attribute>();
@@ -280,7 +280,7 @@ public class XmlDom4jUtils {
      * @返回类型：Attribute
      * @时间：2011-4-14下午01:45:27
      */
-    public static Attribute getAttribute(Element element, String attrName) {
+    public Attribute getAttribute(Element element, String attrName) {
         attrName = attrName.trim();
         if (element == null)
             return null;
@@ -298,7 +298,7 @@ public class XmlDom4jUtils {
      * @返回类型：String
      * @时间：2011-4-14下午02:36:48
      */
-    public static String attrValue(Element e, String attrName) {
+    public String attrValue(Element e, String attrName) {
         attrName = attrName.trim();
         if (e == null)
             return null;
@@ -314,7 +314,7 @@ public class XmlDom4jUtils {
      * @返回类型：Map<String,String>
      * @时间：2011-4-15上午10:00:26
      */
-    public static Map<String, String> getNodeAttrMap(Element e) {
+    public Map<String, String> getNodeAttrMap(Element e) {
         Map<String, String> attrMap = new HashMap<String, String>();
         if (e == null) {
             return null;
@@ -338,7 +338,7 @@ public class XmlDom4jUtils {
      * @返回类型：Map<String,String>
      * @时间：2011-4-15下午12:24:38
      */
-    public static Map<String, String> getSingleNodeText(Element e) {
+    public Map<String, String> getSingleNodeText(Element e) {
         Map<String, String> map = new HashMap<String, String>();
         if (e == null)
             return null;
@@ -359,7 +359,7 @@ public class XmlDom4jUtils {
      * @返回类型：Map<String,String>
      * @时间：2011-4-15下午12:23:30
      */
-    public static Map<String, String> getSingleNodeText(String xmlFilePath) {
+    public Map<String, String> getSingleNodeText(String xmlFilePath) {
         xmlFilePath = xmlFilePath.trim();
         if (xmlFilePath == null || xmlFilePath.equals("")) {
             return null;
@@ -371,6 +371,13 @@ public class XmlDom4jUtils {
         return getSingleNodeText(rootElement);
     }
 
+
+
+    public enum Flag {
+        one, more
+    }
+
+
     /**
      * @param xmlFilePath
      * @param tagName
@@ -380,13 +387,8 @@ public class XmlDom4jUtils {
      * @返回类型：Element 指定的节点
      * @时间：2011-4-15下午12:22:35
      */
-
-    public enum Flag {
-        one, more
-    }
-
     @SuppressWarnings("unchecked")
-    public static <T> T getNameNode(String xmlFilePath, String tagName, Flag flag) {
+    public <T> T getNameNode(String xmlFilePath, String tagName, Flag flag) {
         xmlFilePath = xmlFilePath.trim();
         tagName = tagName.trim();
         if (xmlFilePath == null || tagName == null || xmlFilePath.equals("") || tagName.equals(""))
@@ -414,7 +416,7 @@ public class XmlDom4jUtils {
      * @返回类型：Map<Integer,Object>
      * @时间：2011-4-18下午04:40:14
      */
-    public static Map<Integer, Object> getNameNodeAllKidsAttributeMap(Element parent) {
+    public Map<Integer, Object> getNameNodeAllKidsAttributeMap(Element parent) {
         Map<Integer, Object> allAttrMap = new HashMap<Integer, Object>();
         if (parent == null)
             return null;
@@ -430,7 +432,7 @@ public class XmlDom4jUtils {
     }
 
     /**
-     * @param xmlFileName
+     * @param xmlFilePath
      * @param nodeName
      * @return @参数描述 :
      * @方法功能描述:根据xml文件名路径和指定的节点名称得到指定节点所有子节点的所有属性集合
@@ -439,7 +441,7 @@ public class XmlDom4jUtils {
      * @时间：2011-4-18下午04:51:46
      */
     @SuppressWarnings("unchecked")
-    public static <T> T getNameNodeAllAttributeMap(String xmlFilePath, String nodeName, Flag flag) {
+    public <T> T getNameNodeAllAttributeMap(String xmlFilePath, String nodeName, Flag flag) {
         nodeName = nodeName.trim();
         Map<String, String> allAttrMap = null;
         Map<Integer, Map<String, String>> mostKidsAllAttriMap = new HashMap<Integer, Map<String, String>>();
@@ -470,7 +472,7 @@ public class XmlDom4jUtils {
      * @返回类型：void
      * @时间：2011-4-18下午05:25:41
      */
-    public static List<Element> ransack(Element element, List<Element> allkidsList) {
+    public List<Element> ransack(Element element, List<Element> allkidsList) {
         if (element == null)
             return null;
         if (hasChild(element)) {
@@ -492,7 +494,7 @@ public class XmlDom4jUtils {
      * @返回类型：Element
      * @时间：2011-4-18下午06:18:56
      */
-    public static List<Element> getNameElement(Element element, String nodeName) {
+    public List<Element> getNameElement(Element element, String nodeName) {
         nodeName = nodeName.trim();
         List<Element> kidsElements = new ArrayList<Element>();
         if (element == null)
@@ -517,7 +519,7 @@ public class XmlDom4jUtils {
      * @返回类型：int 节点唯一返回1, 节点不唯一返回大于一的整型数据
      * @时间：2011-4-20下午04:36:22
      */
-    public static int validateSingle(Element element) {
+    public int validateSingle(Element element) {
         int j = 1;
         if (element == null)
             return j;

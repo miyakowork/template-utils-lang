@@ -8,7 +8,7 @@ import java.util.Map;
  * 一般Controller层或者需要对WEB操作的工具方法
  * Created by wuwenbin on 2017/5/11.
  */
-public class RequestWebUtils {
+public class RequestWeb {
 
     /**
      * string[]Map to string Map
@@ -16,7 +16,7 @@ public class RequestWebUtils {
      * @param requestWebMap
      * @return
      */
-    public static Map<String, Object> arrayMapToStringMap(Map<String, String[]> requestWebMap) {
+    public Map<String, Object> arrayMapToStringMap(Map<String, String[]> requestWebMap) {
         Iterator<?> iterator = requestWebMap.entrySet().iterator();
         HashMap map;
         String key;

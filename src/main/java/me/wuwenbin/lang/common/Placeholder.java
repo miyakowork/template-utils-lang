@@ -1,5 +1,7 @@
 package me.wuwenbin.lang.common;
 
+import me.wuwenbin.lang.entrance.$;
+
 /**
  * 字符串占位模板替换工具,hutool来源
  * 修改部分代码以适应package的更改
@@ -8,7 +10,7 @@ package me.wuwenbin.lang.common;
  * @author looly
  * @since 1.0
  */
-public class PlaceholderUtils {
+public class Placeholder {
 
     /**
      * 格式化字符串<br>
@@ -23,8 +25,8 @@ public class PlaceholderUtils {
      * @param argArray          参数列表
      * @return 结果
      */
-    public static String format(final String needReplaceString, final Object... argArray) {
-        if (StringUtils.isBlank(needReplaceString) || (argArray == null || argArray.length == 0)) {
+    public String format(final String needReplaceString, final Object... argArray) {
+        if ($.stringhelper.isBlank(needReplaceString) || (argArray == null || argArray.length == 0)) {
             return needReplaceString;
         }
         final int strPatternLength = needReplaceString.length();
@@ -35,7 +37,7 @@ public class PlaceholderUtils {
         int handledPosition = 0;//记录已经处理到的位置
         int delimiterIndex;//占位符所在位置
         for (int argIndex = 0; argIndex < argArray.length; argIndex++) {
-            delimiterIndex = needReplaceString.indexOf(StringUtils.EMPTY_JSON, handledPosition);
+            delimiterIndex = needReplaceString.indexOf(StringHelper.EMPTY_JSON, handledPosition);
             if (delimiterIndex == -1) {//剩余部分无占位符
                 if (handledPosition == 0) { //不带占位符的模板直接返回
                     return needReplaceString;
@@ -44,22 +46,22 @@ public class PlaceholderUtils {
                     return sb.toString();
                 }
             } else {
-                if (delimiterIndex > 0 && needReplaceString.charAt(delimiterIndex - 1) == StringUtils.C_BACKSLASH) {//转义符
-                    if (delimiterIndex > 1 && needReplaceString.charAt(delimiterIndex - 2) == StringUtils.C_BACKSLASH) {//双转义符
+                if (delimiterIndex > 0 && needReplaceString.charAt(delimiterIndex - 1) == StringHelper.C_BACKSLASH) {//转义符
+                    if (delimiterIndex > 1 && needReplaceString.charAt(delimiterIndex - 2) == StringHelper.C_BACKSLASH) {//双转义符
                         //转义符之前还有一个转义符，占位符依旧有效
                         sb.append(needReplaceString, handledPosition, delimiterIndex - 1);
-                        sb.append(StringUtils.utf8Str(argArray[argIndex]));
+                        sb.append($.stringhelper.utf8Str(argArray[argIndex]));
                         handledPosition = delimiterIndex + 2;
                     } else {
                         //占位符被转义
                         argIndex--;
                         sb.append(needReplaceString, handledPosition, delimiterIndex - 1);
-                        sb.append(StringUtils.C_DELIMITER_START);
+                        sb.append(StringHelper.C_DELIMITER_START);
                         handledPosition = delimiterIndex + 1;
                     }
                 } else {//正常占位符
                     sb.append(needReplaceString, handledPosition, delimiterIndex);
-                    sb.append(StringUtils.utf8Str(argArray[argIndex]));
+                    sb.append($.stringhelper.utf8Str(argArray[argIndex]));
                     handledPosition = delimiterIndex + 2;
                 }
             }
@@ -79,7 +81,7 @@ public class PlaceholderUtils {
      * @param suffix 后缀
      * @return 包装后的字符串
      */
-    public static String wrap(String str, String prefix, String suffix) {
+    public String wrap(String str, String prefix, String suffix) {
         return format("{}{}{}", prefix, str, suffix);
     }
 

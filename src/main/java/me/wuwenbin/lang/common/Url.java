@@ -12,7 +12,7 @@ import java.nio.charset.Charset;
  * @author wuwenbin
  * @since 1.0.
  */
-public class UrlUtils {
+public class Url {
 
     /**
      * url解码,UTF-8
@@ -20,7 +20,7 @@ public class UrlUtils {
      * @param input
      * @return
      */
-    public static String urlDecode(String input) {
+    public String urlDecode(String input) {
         return urlDecode(input, Charset.defaultCharset().displayName());
     }
 
@@ -31,7 +31,7 @@ public class UrlUtils {
      * @param encoding
      * @return
      */
-    public static String urlDecode(String input, String encoding) {
+    public String urlDecode(String input, String encoding) {
         try {
             return URLDecoder.decode(input, encoding);
         } catch (UnsupportedEncodingException e) {
@@ -45,7 +45,7 @@ public class UrlUtils {
      * @param input
      * @return
      */
-    public static String urlEncode(String input) {
+    public String urlEncode(String input) {
         return urlEncode(input, Charset.defaultCharset().displayName());
     }
 
@@ -56,7 +56,7 @@ public class UrlUtils {
      * @param encoding
      * @return
      */
-    public static String urlEncode(String input, String encoding) {
+    public String urlEncode(String input, String encoding) {
         try {
             return URLEncoder.encode(input, encoding);
         } catch (UnsupportedEncodingException e) {
