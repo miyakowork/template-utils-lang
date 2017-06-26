@@ -1,7 +1,7 @@
-package me.wuwenbin.lang.common;
+package me.wuwenbin.lang.text;
 
 
-import me.wuwenbin.lang.entrance.$;
+import me.wuwenbin.lang.TP;
 
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -1030,7 +1030,7 @@ public class StringHelper {
         if (params == null || params.length == 0 || isBlank(template)) {
             return template;
         }
-        return $.placeholder.format(template, params);
+        return TP.placeholder.format(template, params);
     }
 
     /**

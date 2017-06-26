@@ -1,4 +1,4 @@
-package me.wuwenbin.lang.common;
+package me.wuwenbin.lang.okane;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,7 +12,7 @@ public class Amount {
 
     private static final Pattern AMOUNT_PATTERN =
             Pattern.compile("^(0|[1-9]\\d{0,11})\\.(\\d\\d)$"); // 不考虑分隔符的正确性
-    private static final char[] RMB_NUMS = "零壹贰叁肆伍陆柒捌玖".toCharArray();
+    private static final char[] RMB = "零壹贰叁肆伍陆柒捌玖".toCharArray();
     private static final String[] UNITS = {"元", "角", "分", "整"};
     private static final String[] U1 = {"", "拾", "佰", "仟"};
     private static final String[] U2 = {"", "万", "亿"};
@@ -60,8 +60,8 @@ public class Amount {
     private static String fraction2rmb(String fraction) {
         char jiao = fraction.charAt(0); // 角
         char fen = fraction.charAt(1); // 分
-        return (RMB_NUMS[jiao - '0'] + (jiao > '0' ? UNITS[1] : ""))
-                + (fen > '0' ? RMB_NUMS[fen - '0'] + UNITS[2] : "");
+        return (RMB[jiao - '0'] + (jiao > '0' ? UNITS[1] : ""))
+                + (fen > '0' ? RMB[fen - '0'] + UNITS[2] : "");
     }
 
     // 将金额整数部分转换为中文大写
@@ -74,7 +74,7 @@ public class Amount {
             if (n == '0') {
                 // 当n是0且n的右边一位不是0时，插入[零]
                 if (i < integer.length() - 1 && integer.charAt(i + 1) != '0') {
-                    buffer.append(RMB_NUMS[0]);
+                    buffer.append(RMB[0]);
                 }
                 // 插入[万]或者[亿]
                 if (j % 4 == 0) {
@@ -89,7 +89,7 @@ public class Amount {
                     buffer.append(U2[j / 4]);     // 插入[万]或者[亿]
                 }
                 buffer.append(U1[j % 4]);         // 插入[拾]、[佰]或[仟]
-                buffer.append(RMB_NUMS[n - '0']); // 插入数字
+                buffer.append(RMB[n - '0']); // 插入数字
             }
         }
         return buffer.reverse().toString();

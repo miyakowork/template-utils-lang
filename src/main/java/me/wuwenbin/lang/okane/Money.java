@@ -1,4 +1,4 @@
-package me.wuwenbin.lang.common;
+package me.wuwenbin.lang.okane;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

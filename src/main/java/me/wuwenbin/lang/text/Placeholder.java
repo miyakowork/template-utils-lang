@@ -1,6 +1,6 @@
-package me.wuwenbin.lang.common;
+package me.wuwenbin.lang.text;
 
-import me.wuwenbin.lang.entrance.$;
+import me.wuwenbin.lang.TP;
 
 /**
  * 字符串占位模板替换工具,hutool来源
@@ -26,7 +26,7 @@ public class Placeholder {
      * @return 结果
      */
     public String format(final String needReplaceString, final Object... argArray) {
-        if ($.stringhelper.isBlank(needReplaceString) || (argArray == null || argArray.length == 0)) {
+        if (TP.stringhelper.isBlank(needReplaceString) || (argArray == null || argArray.length == 0)) {
             return needReplaceString;
         }
         final int strPatternLength = needReplaceString.length();
@@ -50,7 +50,7 @@ public class Placeholder {
                     if (delimiterIndex > 1 && needReplaceString.charAt(delimiterIndex - 2) == StringHelper.C_BACKSLASH) {//双转义符
                         //转义符之前还有一个转义符，占位符依旧有效
                         sb.append(needReplaceString, handledPosition, delimiterIndex - 1);
-                        sb.append($.stringhelper.utf8Str(argArray[argIndex]));
+                        sb.append(TP.stringhelper.utf8Str(argArray[argIndex]));
                         handledPosition = delimiterIndex + 2;
                     } else {
                         //占位符被转义
@@ -61,7 +61,7 @@ public class Placeholder {
                     }
                 } else {//正常占位符
                     sb.append(needReplaceString, handledPosition, delimiterIndex);
-                    sb.append($.stringhelper.utf8Str(argArray[argIndex]));
+                    sb.append(TP.stringhelper.utf8Str(argArray[argIndex]));
                     handledPosition = delimiterIndex + 2;
                 }
             }

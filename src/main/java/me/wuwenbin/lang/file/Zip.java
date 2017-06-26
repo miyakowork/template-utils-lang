@@ -1,4 +1,4 @@
-package me.wuwenbin.lang.common;
+package me.wuwenbin.lang.file;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

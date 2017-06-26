@@ -1,4 +1,4 @@
-package me.wuwenbin.lang.common;
+package me.wuwenbin.lang.base;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

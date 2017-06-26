@@ -1,4 +1,4 @@
-package me.wuwenbin.lang.config.xml;
+package me.wuwenbin.lang.config;
 
 import java.io.File;
 import java.io.FileWriter;

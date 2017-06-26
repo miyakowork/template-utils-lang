@@ -1,4 +1,4 @@
-package me.wuwenbin.lang.common;
+package me.wuwenbin.lang.clazz;
 
 
 import java.io.File;
@@ -28,8 +28,8 @@ public class ClassScan {
      * @param includeAnnotations 要包含的注解，默认为全部
      * @param includeNames       要包含的class名称（支持正则），默认为全部
      * @return 符合条件的class类集合
-     * @throws IOException
-     * @throws ClassNotFoundException
+     * @throws IOException IOException
+     * @throws ClassNotFoundException ClassNotFoundException
      */
     public Set<Class<?>> scan(String basePackage, Set<Class<? extends Annotation>> includeAnnotations, Set<String> includeNames) throws IOException, ClassNotFoundException {
         Set<Class<?>> result = new HashSet<>();
@@ -57,7 +57,7 @@ public class ClassScan {
             File[] files = currentFile.listFiles(new FileFilter() {
                 @Override
                 public boolean accept(File file) {
-                    return file.isDirectory() || file.getName().endsWith(".class");
+                    return file.isDirectory() || file.getName().endsWith(".clazz");
                 }
             });
             for (File file : files) {
@@ -88,7 +88,7 @@ public class ClassScan {
             }
             if (jarName.startsWith(currentPath)) {
                 int idx = jarName.lastIndexOf('/');
-                if (jarName.endsWith(".class")
+                if (jarName.endsWith(".clazz")
                         && !jarEntry.isDirectory()) {
                     String className = jarName.substring(jarName.lastIndexOf('/') + 1,
                             jarName.length() - 6);

@@ -1,6 +1,6 @@
-package me.wuwenbin.lang.config.properties;
+package me.wuwenbin.lang.config;
 
-import me.wuwenbin.lang.entrance.$;
+import me.wuwenbin.lang.TP;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -31,7 +31,7 @@ public final class Properties {
      * @创建日期: 2013-11-21 下午07:01:48
      */
     public String getProperty(String filePath, String name) {
-        if ($.stringhelper.isBlank(filePath) || $.stringhelper.isBlank(name)) {
+        if (TP.stringhelper.isBlank(filePath) || TP.stringhelper.isBlank(name)) {
             throw new IllegalArgumentException("The parameters must not be null");
         }
         try {
@@ -60,7 +60,7 @@ public final class Properties {
      * @创建日期: 2013-11-21 下午07:01:48
      */
     public String getProperty(String filePath, String name, String defaultValue) {
-        if ($.stringhelper.isBlank(filePath) || $.stringhelper.isBlank(name) || $.stringhelper.isBlank(defaultValue)) {
+        if (TP.stringhelper.isBlank(filePath) || TP.stringhelper.isBlank(name) || TP.stringhelper.isBlank(defaultValue)) {
             throw new IllegalArgumentException("The parameters must not be null");
         }
         try {
@@ -71,7 +71,7 @@ public final class Properties {
                 PROPS.put(filePath, prop);
             }
             String value = prop.getProperty(name);
-            return $.stringhelper.isBlank(value) ? defaultValue : value;
+            return TP.stringhelper.isBlank(value) ? defaultValue : value;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

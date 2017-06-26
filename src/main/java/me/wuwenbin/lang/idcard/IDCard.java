@@ -1,4 +1,4 @@
-package me.wuwenbin.lang.common;
+package me.wuwenbin.lang.idcard;
 
 import java.util.regex.Pattern;
 

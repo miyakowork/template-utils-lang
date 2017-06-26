@@ -1,4 +1,4 @@
-package me.wuwenbin.lang.common;
+package me.wuwenbin.lang.base;
 
 import me.wuwenbin.lang.support.exception.LangException;
 
@@ -324,17 +324,17 @@ public class Image {
     public final void pressImage(File pressImgFile, File srcImageFile, File destImageFile, int x, int y, float alpha) {
         try {
             java.awt.Image src = ImageIO.read(srcImageFile);
-            int wideth = src.getWidth(null);
+            int width = src.getWidth(null);
             int height = src.getHeight(null);
-            BufferedImage image = new BufferedImage(wideth, height, BufferedImage.TYPE_INT_RGB);
+            BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
             Graphics2D g = image.createGraphics();
-            g.drawImage(src, 0, 0, wideth, height, null);
+            g.drawImage(src, 0, 0, width, height, null);
             // 水印文件
             java.awt.Image pressImg = ImageIO.read(pressImgFile);
             int pressImgWidth = pressImg.getWidth(null);
             int pressImgHeight = pressImg.getHeight(null);
             g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, alpha));
-            g.drawImage(pressImg, (wideth - pressImgWidth) / 2, (height - pressImgHeight) / 2, pressImgWidth, pressImgHeight, null);
+            g.drawImage(pressImg, (width - pressImgWidth) / 2, (height - pressImgHeight) / 2, pressImgWidth, pressImgHeight, null);
             // 水印文件结束
             g.dispose();
             ImageIO.write(image, "JPEG", destImageFile);

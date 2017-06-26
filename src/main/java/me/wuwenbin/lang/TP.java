@@ -1,17 +1,28 @@
-package me.wuwenbin.lang.entrance;
+package me.wuwenbin.lang;
 
-import me.wuwenbin.lang.common.*;
-import me.wuwenbin.lang.config.properties.Properties;
-import me.wuwenbin.lang.config.xml.XmlDom4j;
-import me.wuwenbin.lang.config.xml.XmlW3c;
+import me.wuwenbin.lang.clazz.ClassKit;
+import me.wuwenbin.lang.clazz.ClassScan;
+import me.wuwenbin.lang.base.*;
+import me.wuwenbin.lang.base.Runtime;
+import me.wuwenbin.lang.config.Properties;
+import me.wuwenbin.lang.config.XmlDom4j;
+import me.wuwenbin.lang.config.XmlW3c;
 import me.wuwenbin.lang.file.FilePath;
 import me.wuwenbin.lang.file.Files;
+import me.wuwenbin.lang.file.Zip;
+import me.wuwenbin.lang.idcard.IDCard;
+import me.wuwenbin.lang.okane.Amount;
+import me.wuwenbin.lang.okane.Money;
+import me.wuwenbin.lang.text.PinYin;
+import me.wuwenbin.lang.text.Placeholder;
+import me.wuwenbin.lang.text.StringHelper;
+import me.wuwenbin.lang.web.*;
 
 /**
  * 工具集合入口
  * Created by wuwenbin on 2017/6/11.
  */
-public class $ {
+public class TP {
 
     /**
      * 金额操作
@@ -122,5 +133,15 @@ public class $ {
      * 文件工具类
      */
     public static Files files = new Files();
+
+    /**
+     * 运行时工具，获取运行时，相关信息
+     */
+    public static Runtime runtime = new Runtime();
+
+    /**
+     * 类操作相关工具
+     */
+    public static ClassKit classKit = new ClassKit();
 
 }

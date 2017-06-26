@@ -1,6 +1,6 @@
 package me.wuwenbin.lang.file;
 
-import me.wuwenbin.lang.entrance.$;
+import me.wuwenbin.lang.TP;
 
 /**
  * 文件名及文件路径相关的操作
@@ -20,7 +20,7 @@ public class FilePath {
         String regex = "[a-zA-Z]:(?:[/][^/:*?\"<>|.][^/:*?\"<>|]{0,254})+";
         // String regex
         // ="^([a-zA-z]:)|(^\\.{0,2}/)|(^\\w*)\\w([^:?*\"><|]){0,250}";
-        return $.regex.isMatch(commandPath(path), regex);
+        return TP.regex.isMatch(commandPath(path), regex);
 
     }
 

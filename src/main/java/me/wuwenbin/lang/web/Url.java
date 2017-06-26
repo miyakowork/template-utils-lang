@@ -1,4 +1,4 @@
-package me.wuwenbin.lang.common;
+package me.wuwenbin.lang.web;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;

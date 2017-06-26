@@ -1,4 +1,4 @@
-package me.wuwenbin.lang.common;
+package me.wuwenbin.lang.web;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -11,7 +11,7 @@ import java.util.Map;
 public class RequestWeb {
 
     /**
-     * string[]Map to string Map
+     * text[]Map to text Map
      *
      * @param requestWebMap
      * @return

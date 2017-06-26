@@ -1,4 +1,4 @@
-package me.wuwenbin.lang.config.xml;
+package me.wuwenbin.lang.config;
 
 import me.wuwenbin.lang.support.exception.LangException;
 import org.w3c.dom.Document;

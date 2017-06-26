@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.wuwenbin.lang.common;
+package me.wuwenbin.lang.web;
 
 import java.util.regex.Pattern;
 
