@@ -1,3 +1,6 @@
+## 2.7.0.RELEASE
+- 修改package为org.templateproject
+- 代码方法优化
 ## 2.6.0.RELEASE
 - 本版本不与老版本兼容，切换版本请慎重
 - 增加2个通用操作对象BlurObject和PairObject
