@@ -16,13 +16,11 @@
 package org.templateproject.lang.clazz;
 
 import com.thoughtworks.paranamer.AdaptiveParanamer;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.util.ClassUtils;
 import org.templateproject.lang.TP;
 import org.templateproject.lang.support.lang.BlurObject;
 import org.templateproject.lang.support.lang.PairObject;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.util.ClassUtils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
@@ -38,7 +36,6 @@ import java.util.*;
  */
 public class ClassKit {
 
-    private static final Log _LOG = LogFactory.getLog(ClassUtils.class);
 
     private static InnerClassLoader _INNER_CLASS_LOADER = new InnerClassLoader(new URL[]{}, ClassUtils.class.getClassLoader());
 
@@ -80,7 +77,7 @@ public class ClassKit {
                     return (T) implClass.newInstance();
                 }
             } catch (Exception e) {
-                _LOG.warn("", TP.runtime.unwrapThrow(e));
+                System.err.println(TP.runtime.unwrapThrow(e));
             }
         }
         return null;
@@ -93,7 +90,7 @@ public class ClassKit {
                 try {
                     return (T) implClass.newInstance();
                 } catch (Exception e) {
-                    _LOG.warn("", TP.runtime.unwrapThrow(e));
+                    System.err.println(TP.runtime.unwrapThrow(e));
                 }
             }
         }
@@ -290,7 +287,7 @@ public class ClassKit {
         try {
             return Class.forName(StringUtils.substringBetween(clazz.getName(), "[L", ";"));
         } catch (ClassNotFoundException e) {
-            _LOG.warn("", TP.runtime.unwrapThrow(e));
+            System.err.println(TP.runtime.unwrapThrow(e));
         }
         return null;
     }
@@ -304,7 +301,7 @@ public class ClassKit {
         try {
             return wrapper(clazz.newInstance());
         } catch (Exception e) {
-            _LOG.warn("", TP.runtime.unwrapThrow(e));
+            System.err.println(TP.runtime.unwrapThrow(e));
         }
         return null;
     }

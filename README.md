@@ -1,3 +1,5 @@
+## 2.7.1.RELEASE
+- 代码BUG修复
 ## 2.7.0.RELEASE
 - 修改package为org.templateproject
 - 代码方法优化
