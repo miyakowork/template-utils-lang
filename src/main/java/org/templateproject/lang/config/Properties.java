@@ -4,6 +4,7 @@ import org.templateproject.lang.TP;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -17,9 +18,9 @@ import java.util.concurrent.ConcurrentMap;
  */
 public final class Properties {
 
-    private final String UTF_8 = "UTF-8";
+    private static final String UTF_8 = "UTF-8";
 
-    private final ConcurrentMap<String, java.util.Properties> PROPS = new ConcurrentHashMap<>();
+    private static final ConcurrentMap<String, java.util.Properties> PROPS = new ConcurrentHashMap<>();
 
 
     /**
@@ -38,7 +39,7 @@ public final class Properties {
             java.util.Properties prop = PROPS.get(filePath);
             if (prop == null) {
                 prop = new java.util.Properties();
-                prop.load(Properties.class.getResourceAsStream(filePath));
+                prop.load(new InputStreamReader(Properties.class.getResourceAsStream(filePath), UTF_8));
                 PROPS.put(filePath, prop);
             }
             return prop.getProperty(name);
@@ -67,7 +68,7 @@ public final class Properties {
             java.util.Properties prop = PROPS.get(filePath);
             if (prop == null) {
                 prop = new java.util.Properties();
-                prop.load(Properties.class.getResourceAsStream(filePath));
+                prop.load(new InputStreamReader(Properties.class.getResourceAsStream(filePath), UTF_8));
                 PROPS.put(filePath, prop);
             }
             String value = prop.getProperty(name);
