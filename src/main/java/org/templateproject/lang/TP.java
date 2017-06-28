@@ -134,9 +134,4 @@ public class TP {
      */
     public static Files files = new Files();
 
-
-    public static void main(String[] args) {
-        String s =TP.properties.getProperty("/ttt.properties","jodd","111");
-        System.out.println(s);
-    }
 }
