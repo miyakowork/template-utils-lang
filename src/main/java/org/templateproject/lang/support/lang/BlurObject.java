@@ -15,11 +15,11 @@
  */
 package org.templateproject.lang.support.lang;
 
-import org.templateproject.lang.TP;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.templateproject.lang.base.RuntimeKit;
 
 import java.io.InputStream;
 import java.io.Reader;
@@ -38,7 +38,7 @@ import java.util.*;
  */
 public class BlurObject implements Serializable, Cloneable {
 
-    private static final Log _LOG = LogFactory.getLog(BlurObject.class);
+    private static final Logger _LOG = LoggerFactory.getLogger(BlurObject.class);
 
     /**
      *
@@ -221,7 +221,7 @@ public class BlurObject implements Serializable, Cloneable {
                     return IOUtils.toString(_reader);
                 }
             } catch (Exception e) {
-                _LOG.warn("", TP.runtime.unwrapThrow(e));
+                _LOG.warn("", RuntimeKit.unwrapThrow(e));
             } finally {
                 IOUtils.closeQuietly(_reader);
             }
@@ -401,7 +401,7 @@ public class BlurObject implements Serializable, Cloneable {
                     }
                 }
             } catch (Exception e) {
-                _LOG.warn("", TP.runtime.unwrapThrow(e));
+                _LOG.warn("", RuntimeKit.unwrapThrow(e));
             } finally {
                 IOUtils.closeQuietly(_input);
             }
@@ -489,7 +489,7 @@ public class BlurObject implements Serializable, Cloneable {
             try {
                 object = clazz.cast(attr);
             } catch (ClassCastException e) {
-                _LOG.warn("", TP.runtime.unwrapThrow(e));
+                _LOG.warn("", RuntimeKit.unwrapThrow(e));
             }
         }
         return object;

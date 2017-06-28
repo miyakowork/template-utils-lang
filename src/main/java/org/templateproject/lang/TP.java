@@ -1,8 +1,9 @@
 package org.templateproject.lang;
 
-import org.templateproject.lang.base.*;
-import org.templateproject.lang.base.Runtime;
-import org.templateproject.lang.clazz.ClassKit;
+import org.templateproject.lang.base.Image;
+import org.templateproject.lang.base.Random;
+import org.templateproject.lang.base.Regex;
+import org.templateproject.lang.base.Validate;
 import org.templateproject.lang.clazz.ClassScan;
 import org.templateproject.lang.config.Properties;
 import org.templateproject.lang.config.XmlDom4j;
@@ -110,11 +111,6 @@ public class TP {
     public static Zip zip = new Zip();
 
     /**
-     * 读取或者写入properties文件的工具类
-     */
-    public static Properties properties = new Properties();
-
-    /**
      * dom4j方式处理xml
      */
     public static XmlDom4j dom4jXml = new XmlDom4j();
@@ -125,6 +121,10 @@ public class TP {
     public static XmlW3c w3cXml = new XmlW3c();
 
     /**
+     * 属性文件处理工具
+     */
+    public static Properties properties = new Properties();
+    /**
      * 文件名及文件路径相关的操作
      */
     public static FilePath filePath = new FilePath();
@@ -133,15 +133,5 @@ public class TP {
      * 文件工具类
      */
     public static Files files = new Files();
-
-    /**
-     * 运行时工具，获取运行时，相关信息
-     */
-    public static Runtime runtime = new Runtime();
-
-    /**
-     * 类操作相关工具
-     */
-    public static ClassKit classKit = new ClassKit();
 
 }

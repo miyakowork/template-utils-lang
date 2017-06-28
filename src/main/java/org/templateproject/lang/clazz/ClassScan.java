@@ -57,7 +57,7 @@ public class ClassScan {
             File[] files = currentFile.listFiles(new FileFilter() {
                 @Override
                 public boolean accept(File file) {
-                    return file.isDirectory() || file.getName().endsWith(".clazz");
+                    return file.isDirectory() || file.getName().endsWith(".class");
                 }
             });
             for (File file : files) {
@@ -88,7 +88,7 @@ public class ClassScan {
             }
             if (jarName.startsWith(currentPath)) {
                 int idx = jarName.lastIndexOf('/');
-                if (jarName.endsWith(".clazz")
+                if (jarName.endsWith(".class")
                         && !jarEntry.isDirectory()) {
                     String className = jarName.substring(jarName.lastIndexOf('/') + 1,
                             jarName.length() - 6);

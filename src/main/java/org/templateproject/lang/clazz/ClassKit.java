@@ -17,8 +17,9 @@ package org.templateproject.lang.clazz;
 
 import com.thoughtworks.paranamer.AdaptiveParanamer;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.util.ClassUtils;
-import org.templateproject.lang.TP;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.templateproject.lang.base.RuntimeKit;
 import org.templateproject.lang.support.lang.BlurObject;
 import org.templateproject.lang.support.lang.PairObject;
 
@@ -37,7 +38,9 @@ import java.util.*;
 public class ClassKit {
 
 
-    private static InnerClassLoader _INNER_CLASS_LOADER = new InnerClassLoader(new URL[]{}, ClassUtils.class.getClassLoader());
+    private static final Logger _LOG = LoggerFactory.getLogger(ClassKit.class);
+
+    private static InnerClassLoader _INNER_CLASS_LOADER = new InnerClassLoader(new URL[]{}, ClassKit.class.getClassLoader());
 
     public static class InnerClassLoader extends URLClassLoader {
 
@@ -77,7 +80,7 @@ public class ClassKit {
                     return (T) implClass.newInstance();
                 }
             } catch (Exception e) {
-                System.err.println(TP.runtime.unwrapThrow(e));
+                _LOG.warn("", RuntimeKit.unwrapThrow(e));
             }
         }
         return null;
@@ -90,7 +93,7 @@ public class ClassKit {
                 try {
                     return (T) implClass.newInstance();
                 } catch (Exception e) {
-                    System.err.println(TP.runtime.unwrapThrow(e));
+                    _LOG.warn("", RuntimeKit.unwrapThrow(e));
                 }
             }
         }
@@ -103,7 +106,7 @@ public class ClassKit {
             _targetClass = Thread.currentThread().getContextClassLoader().loadClass(className);
         } catch (ClassNotFoundException e) {
             try {
-                _targetClass = Class.forName(className, false, ClassUtils.class.getClassLoader());
+                _targetClass = Class.forName(className, false, ClassKit.class.getClassLoader());
             } catch (ClassNotFoundException ex) {
                 try {
                     _targetClass = _INNER_CLASS_LOADER.loadClass(className);
@@ -244,7 +247,7 @@ public class ClassKit {
      */
     public static <A extends Annotation> List<PairObject<Field, A>> getFieldAnnotations(Class<?> clazz, Class<A> annotationClazz) {
         List<PairObject<Field, A>> _annotations = new ArrayList<PairObject<Field, A>>();
-        for (Field _field : getFields(clazz, true)) {
+        for (Field _field : ClassKit.getFields(clazz, true)) {
             A _annotation = _field.getAnnotation(annotationClazz);
             if (_annotation != null) {
                 _annotations.add(new PairObject<Field, A>(_field, _annotation));
@@ -261,7 +264,7 @@ public class ClassKit {
      */
     public static <A extends Annotation> PairObject<Field, A> getFieldAnnotationFirst(Class<?> clazz, Class<A> annotationClazz) {
         PairObject<Field, A> _returnAnno = null;
-        for (Field _field : getFields(clazz, true)) {
+        for (Field _field : ClassKit.getFields(clazz, true)) {
             A _annotation = _field.getAnnotation(annotationClazz);
             if (_annotation != null) {
                 _returnAnno = new PairObject<Field, A>(_field, _annotation);
@@ -287,7 +290,7 @@ public class ClassKit {
         try {
             return Class.forName(StringUtils.substringBetween(clazz.getName(), "[L", ";"));
         } catch (ClassNotFoundException e) {
-            System.err.println(TP.runtime.unwrapThrow(e));
+            _LOG.warn("", RuntimeKit.unwrapThrow(e));
         }
         return null;
     }
@@ -301,7 +304,7 @@ public class ClassKit {
         try {
             return wrapper(clazz.newInstance());
         } catch (Exception e) {
-            System.err.println(TP.runtime.unwrapThrow(e));
+            _LOG.warn("", RuntimeKit.unwrapThrow(e));
         }
         return null;
     }

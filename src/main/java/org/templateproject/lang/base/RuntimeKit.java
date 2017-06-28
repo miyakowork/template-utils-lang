@@ -15,10 +15,11 @@
  */
 package org.templateproject.lang.base;
 
-import org.templateproject.lang.TP;
-import org.templateproject.lang.support.utils.ExpressionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.SystemUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.templateproject.lang.support.utils.ExpressionUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,21 +35,23 @@ import java.util.Map;
  * @author 刘镇 (suninformation@163.com) on 2010-8-2 上午10:10:16
  * @version 1.0
  */
-public class Runtime {
+public class RuntimeKit {
+
+    private static final Logger _LOG = LoggerFactory.getLogger(RuntimeKit.class);
 
     /**
      * 系统环境变量映射
      */
-    private static final Map<String, String> SYSTEM_ENV_MAP = new HashMap<>();
+    private static final Map<String, String> SYSTEM_ENV_MAP = new HashMap<String, String>();
 
     static {
-        TP.runtime.initSystemEnvironment();
+        initSystemEnvs();
     }
 
     /**
      * 初始化系统环境，获取当前系统环境变量
      */
-    public void initSystemEnvironment() {
+    public static void initSystemEnvs() {
         Process p = null;
         BufferedReader br = null;
         try {
@@ -57,7 +60,7 @@ public class Runtime {
             } else if (SystemUtils.IS_OS_UNIX) {
                 p = java.lang.Runtime.getRuntime().exec("/bin/sh -c set");
             } else {
-                System.out.println("Unknown os.name=" + SystemUtils.OS_NAME);
+                _LOG.warn("Unknown os.name=" + SystemUtils.OS_NAME);
                 SYSTEM_ENV_MAP.clear();
             }
             if (p != null) {
@@ -73,13 +76,13 @@ public class Runtime {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            _LOG.warn("异常", RuntimeKit.unwrapThrow(e));
         } finally {
             if (br != null) {
                 try {
                     br.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    _LOG.warn("", e);
                 }
             }
             if (p != null) {
@@ -93,9 +96,9 @@ public class Runtime {
      *
      * @return 环境变量对应表
      */
-    public Map<String, String> getSystemEnvs() {
+    public static Map<String, String> getSystemEnvs() {
         if (SYSTEM_ENV_MAP.isEmpty()) {
-            initSystemEnvironment();
+            initSystemEnvs();
         }
         return SYSTEM_ENV_MAP;
     }
@@ -106,10 +109,10 @@ public class Runtime {
      * @param envName 环境名，如果为空，返回null
      * @return 当指定名称为空或者对应名称环境变量不存在时返回空
      */
-    public String getSystemEnv(String envName) {
+    public static String getSystemEnv(String envName) {
         if (StringUtils.isNotBlank(envName)) {
             if (SYSTEM_ENV_MAP.isEmpty()) {
-                initSystemEnvironment();
+                initSystemEnvs();
             }
             return SYSTEM_ENV_MAP.get(envName);
         }
@@ -119,21 +122,21 @@ public class Runtime {
     /**
      * @return 当前操作系统是否为类Unix系统
      */
-    public boolean isUnixOrLinux() {
+    public static boolean isUnixOrLinux() {
         return SystemUtils.IS_OS_UNIX;
     }
 
     /**
      * @return 当前操作系统是否为Windows系统
      */
-    public boolean isWindows() {
+    public static boolean isWindows() {
         return SystemUtils.IS_OS_WINDOWS;
     }
 
     /**
      * @return 获取应用根路径（若WEB工程则基于.../WEB-INF/返回，若普通工程则返回类所在路径）
      */
-    public String getRootPath() {
+    public static String getRootPath() {
         return getRootPath(true);
     }
 
@@ -141,13 +144,13 @@ public class Runtime {
      * @param safe 若WEB工程是否保留WEB-INF
      * @return 返回应用根路径
      */
-    public String getRootPath(boolean safe) {
+    public static String getRootPath(boolean safe) {
         //
         String _rootPath = null;
         //
-        URL _rootURL = Runtime.class.getClassLoader().getResource("/");
+        URL _rootURL = RuntimeKit.class.getClassLoader().getResource("/");
         if (_rootURL == null) {
-            _rootURL = Runtime.class.getClassLoader().getResource("");
+            _rootURL = RuntimeKit.class.getClassLoader().getResource("");
             if (_rootURL != null) {
                 _rootPath = _rootURL.getPath();
             }
@@ -168,7 +171,7 @@ public class Runtime {
      * @param origin 原始字符串
      * @return 替换${root}、${user.dir}和${user.home}环境变量
      */
-    public String replaceEnvVariable(String origin) {
+    public static String replaceEnvVariable(String origin) {
         if ((origin = StringUtils.trimToNull(origin)) != null) {
             String _defaultPath = getRootPath();
             if (StringUtils.startsWith(origin, "${root}")) {
@@ -189,7 +192,7 @@ public class Runtime {
      * @param args   参数
      * @return 运行时异常
      */
-    public RuntimeException makeRuntimeThrow(String format, Object... args) {
+    public static RuntimeException makeRuntimeThrow(String format, Object... args) {
         return new RuntimeException(String.format(format, args));
     }
 
@@ -201,7 +204,7 @@ public class Runtime {
      * @param args 参数
      * @return 运行时异常
      */
-    public RuntimeException wrapRuntimeThrow(Throwable e, String fmt, Object... args) {
+    public static RuntimeException wrapRuntimeThrow(Throwable e, String fmt, Object... args) {
         return new RuntimeException(String.format(fmt, args), e);
     }
 
@@ -214,7 +217,7 @@ public class Runtime {
      * @param e 抛出对象
      * @return 运行时异常
      */
-    public RuntimeException wrapRuntimeThrow(Throwable e) {
+    public static RuntimeException wrapRuntimeThrow(Throwable e) {
         if (e instanceof RuntimeException) {
             return (RuntimeException) e;
         }
@@ -224,7 +227,7 @@ public class Runtime {
         return new RuntimeException(e);
     }
 
-    public Throwable unwrapThrow(Throwable e) {
+    public static Throwable unwrapThrow(Throwable e) {
         if (e == null) {
             return null;
         }
@@ -245,8 +248,8 @@ public class Runtime {
      *
      * @return 回收的字节数，如果为负数则表示当前内存使用情况很差，基本属于没有内存可用了
      */
-    public long gc() {
-        java.lang.Runtime rt = java.lang.Runtime.getRuntime();
+    public static long gc() {
+        java.lang.Runtime rt = Runtime.getRuntime();
         long lastUsed = rt.totalMemory() - rt.freeMemory();
         rt.gc();
         return lastUsed - rt.totalMemory() + rt.freeMemory();

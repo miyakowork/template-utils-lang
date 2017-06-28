@@ -17,9 +17,9 @@ import java.util.concurrent.ConcurrentMap;
  */
 public final class Properties {
 
-    private static final String UTF_8 = "UTF-8";
+    private final String UTF_8 = "UTF-8";
 
-    private static final ConcurrentMap<String, java.util.Properties> PROPS = new ConcurrentHashMap<>();
+    private final ConcurrentMap<String, java.util.Properties> PROPS = new ConcurrentHashMap<>();
 
 
     /**
